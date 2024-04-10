@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.ArrayList;
 public class HotelRepository {
     public List<Hotel> getHotels() {
+        // MOCKING the data here for initial design
+        // NOTE: This is to be replaced with api during api integration
         return generateHotelList();
     }
 
