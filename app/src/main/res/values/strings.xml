@@ -5,4 +5,5 @@
     <string name="check_out_date_label">Check Out Date:</string>
     <string name="number_of_guests_label">Number Of Guests:</string>
     <string name="search_button_text">Search</string>
+    <string name="back_button_text">Back</string>
 </resources>
