@@ -11,6 +11,7 @@ public class Reservation {
     private String checkInDate;
     private String checkOutDate;
     private List<Guest> guests;
+    private String confirmationNumber;
 
     //PRIMARY CONSTRUCTOR
 
@@ -52,5 +53,13 @@ public class Reservation {
 
     public void setGuests(List<Guest> guests) {
         this.guests = guests;
+    }
+
+    public String getConfirmationNumber() {
+        return confirmationNumber;
+    }
+
+    public void setConfirmationNumber(String confirmationNumber) {
+        this.confirmationNumber = confirmationNumber;
     }
 }
