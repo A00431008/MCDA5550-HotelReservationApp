@@ -1,7 +1,9 @@
 package com.example.mcda5550_hotel_reservation_app.model;
 
+import java.io.Serializable;
+
 // Model class for a Hotel: Attributes are name, price and availability
-public class Hotel {
+public class Hotel implements Serializable {
     // Instance variables for attributes
     private String name;
     private double price;
@@ -31,7 +33,7 @@ public class Hotel {
         this.price = price;
     }
 
-    public boolean isAvailability() {
+    public boolean getAvailability() {
         return availability;
     }
 

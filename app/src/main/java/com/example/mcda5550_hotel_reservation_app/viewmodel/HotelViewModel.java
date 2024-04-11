@@ -12,9 +12,15 @@ public class HotelViewModel extends ViewModel {
     private final MutableLiveData<List<Hotel>> hotelsLiveData = new MutableLiveData<>();
     private final HotelRepository repository;
 
-    public HotelViewModel(HotelRepository repository) {
-        this.repository = repository;
+//    public HotelViewModel(HotelRepository repository) {
+//        this.repository = repository;
+//    }
+
+    public HotelViewModel() {
+        // Initialize repository here or leave it null if it's initialized later
+        repository = new HotelRepository();
     }
+
 
     public LiveData<List<Hotel>> getHotelsLiveData() {
         return hotelsLiveData;
@@ -24,5 +30,4 @@ public class HotelViewModel extends ViewModel {
         List<Hotel> hotels = repository.getHotels();
         hotelsLiveData.setValue(hotels);
     }
-
 }

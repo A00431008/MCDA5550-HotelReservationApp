@@ -53,8 +53,8 @@
                 android:background="@color/label_color"/>
 
             <!-- CHECK IN DATE - DATE PICKER -->
-            <Button
-                android:id="@+id/check_in_date_button"
+            <DatePicker
+                android:id="@+id/check_in_date_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:calendarTextColor="@android:color/white"
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/check_out_date_label"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/check_in_date_button"
+                app:layout_constraintTop_toBottomOf="@id/check_in_date_picker"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
@@ -81,8 +81,8 @@
                 android:background="@color/label_color"/>
 
             <!-- CHECK OUT DATE - DATE PICKER -->
-            <Button
-                android:id="@+id/check_out_date_button"
+            <DatePicker
+                android:id="@+id/check_out_date_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/check_out_date_text_view"
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/number_of_guests_label"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/check_out_date_button"
+                app:layout_constraintTop_toBottomOf="@id/check_out_date_picker"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
