@@ -16,18 +16,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mcda5550_hotel_reservation_app.R;
-import com.example.mcda5550_hotel_reservation_app.adapters.HotelsAdapter;
-import com.example.mcda5550_hotel_reservation_app.interfaces.ItemClickListener;
+import com.example.mcda5550_hotel_reservation_app.adapters.HotelAdapter;
+import com.example.mcda5550_hotel_reservation_app.ItemClickListener;
 import com.example.mcda5550_hotel_reservation_app.model.Hotel;
 import com.example.mcda5550_hotel_reservation_app.viewmodel.HotelViewModel;
 
 public class HotelsListFragment extends Fragment implements ItemClickListener {
 
     private RecyclerView recyclerView;
-    private HotelsAdapter hotelsAdapter;
+    private HotelAdapter hotelAdapter;
     private ProgressBar progressBar;
-
     private HotelViewModel hotelViewModel;
+    private Bundle args;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,8 +51,9 @@ public class HotelsListFragment extends Fragment implements ItemClickListener {
         progressBar = view.findViewById(R.id.progress_bar);
         Button backButton = view.findViewById(R.id.back_button);
         recyclerView = view.findViewById(R.id.hotel_list_recyclerView);
+
         // get arguments from the bundle
-        Bundle args = getArguments();
+        args = getArguments();
 
         // assign arguments to respective variables if arguments is not null
         if (args != null) {
@@ -74,14 +75,14 @@ public class HotelsListFragment extends Fragment implements ItemClickListener {
 
         // Initialize RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        hotelsAdapter = new HotelsAdapter(getContext(), null, this); // Pass null initially
-        recyclerView.setAdapter(hotelsAdapter);
+        hotelAdapter = new HotelAdapter(getContext(), null, this); // Pass null initially
+        recyclerView.setAdapter(hotelAdapter);
 
         // Observe hotel list LiveData from ViewModel
         hotelViewModel.getHotelsLiveData().observe(getViewLifecycleOwner(), hotels -> {
             if (hotels != null) {
                 hideProgress();
-                hotelsAdapter.setHotelList(hotels);
+                hotelAdapter.setHotelList(hotels);
             }
         });
 
@@ -103,17 +104,21 @@ public class HotelsListFragment extends Fragment implements ItemClickListener {
     @Override
     public void onClick(View view, int position) {
         // Handle hotel item click
-        Hotel selectedHotel = hotelsAdapter.getItem(position);
+        Hotel selectedHotel = hotelAdapter.getItem(position);
 
         // Navigate to hotel details fragment
         Bundle bundle = new Bundle();
         bundle.putSerializable("selected_hotel", selectedHotel);
+        bundle.putString("checkInDate", args.getString("checkInDate"));
+        bundle.putString("checkOutDate", args.getString("checkOutDate"));
+        bundle.putString("guestName", args.getString("guestName"));
+        bundle.putString("numberOfGuests", args.getString("numberOfGuests") );
 
-        HotelDetailsFragment hotelDetailsFragment = new HotelDetailsFragment();
-        hotelDetailsFragment.setArguments(bundle);
+        ReservationDetailsFragment reservationDetailsFragment = new ReservationDetailsFragment();
+        reservationDetailsFragment.setArguments(bundle);
 
         requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.app_container_frame_layout, hotelDetailsFragment)
+                .replace(R.id.app_container_frame_layout, reservationDetailsFragment)
                 .addToBackStack(null)
                 .commit();
     }

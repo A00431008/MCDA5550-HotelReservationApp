@@ -1,4 +1,4 @@
-package com.example.mcda5550_hotel_reservation_app.interfaces;
+package com.example.mcda5550_hotel_reservation_app;
 
 import android.view.View;
 
