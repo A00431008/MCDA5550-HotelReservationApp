@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.mcda5550_hotel_reservation_app.model.Reservation;
 import com.example.mcda5550_hotel_reservation_app.API.ApiClient;
-import com.example.mcda5550_hotel_reservation_app.API.HotelApiService;
+import com.example.mcda5550_hotel_reservation_app.API.HotelReservationApiService;
 import com.example.mcda5550_hotel_reservation_app.model.ReservationResponse;
 
 import retrofit2.Call;
@@ -15,39 +15,35 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ReservationRepository {
-
     private static final String TAG = "ReservationRepository";
+    private final HotelReservationApiService hotelReservationApiService;
 
-    private final HotelApiService hotelApiService;
-
+    // Repository CONSTRUCTOR - instantiates the hotelReservationApiService with ApiClient
     public ReservationRepository() {
-        this.hotelApiService = ApiClient.getClient().create(HotelApiService.class);
+        this.hotelReservationApiService = ApiClient.getClient().create(HotelReservationApiService.class);
     }
 
-    // Method to make a reservation
-    public LiveData<String> makeReservation(Reservation reservation) {
-        MutableLiveData<String> confirmationNumberLiveData = new MutableLiveData<>();
-
-        hotelApiService.makeReservation(reservation).enqueue(new Callback<ReservationResponse>() {
+    // Method to make a reservation - creates reservation through API call
+    // Binds and returns the response from the API call with ReservationResponse Model
+    public LiveData<ReservationResponse> createReservation(Reservation reservation) {
+        MutableLiveData<ReservationResponse> reservationLiveData = new MutableLiveData<>();
+        Call<ReservationResponse> call = hotelReservationApiService.createReservation(reservation);
+        call.enqueue(new Callback<ReservationResponse>() {
             @Override
             public void onResponse(Call<ReservationResponse> call, Response<ReservationResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    ReservationResponse reservationResponse = response.body();
-                    String confirmationNumber = reservationResponse.getConfirmationNumber();
-                    confirmationNumberLiveData.setValue(confirmationNumber);
+                if (response.isSuccessful()) {
+                    reservationLiveData.setValue(response.body());
                 } else {
-                    Log.e(TAG, "Failed to make reservation. Response code: " + response.code());
-                    confirmationNumberLiveData.setValue(null);
+                    Log.e(TAG, "Failed to create reservation. Error: " + response.message());
+                    reservationLiveData.setValue(null);
                 }
             }
-
             @Override
             public void onFailure(Call<ReservationResponse> call, Throwable t) {
-                Log.e(TAG, "Failed to make reservation. Error: " + t.getMessage());
-                confirmationNumberLiveData.setValue(null);
+                Log.e(TAG, "Network error. Unable to create reservation. Error: " + t.getMessage());
+                reservationLiveData.setValue(null);
             }
         });
-
-        return confirmationNumberLiveData;
+        return reservationLiveData;
     }
 }

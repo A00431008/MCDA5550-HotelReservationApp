@@ -54,8 +54,9 @@ public class HotelSearchFragment extends Fragment {
         String checkOutDate = dateFormatter(checkOutDatePicker);
         String numberOfGuests = guestsCountEditText.getText().toString();
         String guestName = guestNameEditText.getText().toString();
+        int numDays = getNumberOfDays(checkInDatePicker, checkInDatePicker);
         if (validateInput(checkInDatePicker, checkOutDatePicker, numberOfGuests, guestName)) {
-            startHotelListFragment(checkInDate, checkOutDate, numberOfGuests, guestName);
+            startHotelListFragment(checkInDate, checkOutDate, numberOfGuests, guestName, numDays);
         }
     }
 
@@ -120,12 +121,26 @@ public class HotelSearchFragment extends Fragment {
         }
     }
 
-    private void startHotelListFragment(String checkInDate, String checkOutDate, String numberOfGuests, String guestName) {
+    private int getNumberOfDays(DatePicker startDatePicker, DatePicker endDatePicker) {
+        // Convert DatePickers to Calendar objects
+        Calendar startCalendar = getCalendarFor(startDatePicker);
+        Calendar endCalendar = getCalendarFor(endDatePicker);
+
+        // Calculate the difference in days
+        long differenceInMillis = endCalendar.getTimeInMillis() - startCalendar.getTimeInMillis();
+        int numDays = (int) (differenceInMillis / (24 * 60 * 60 * 1000));
+
+        return numDays;
+    }
+
+    private void startHotelListFragment(String checkInDate, String checkOutDate,
+                                        String numberOfGuests, String guestName, int numOfDays) {
         Bundle bundle = new Bundle();
         bundle.putString("checkInDate", checkInDate);
         bundle.putString("checkOutDate", checkOutDate);
         bundle.putString("numberOfGuests", numberOfGuests);
         bundle.putString("guestName", guestName);
+        bundle.putInt("numberOfDays", numOfDays);
 
         HotelsListFragment hotelsListFragment = new HotelsListFragment();
         hotelsListFragment.setArguments(bundle);

@@ -5,5 +5,7 @@
     <color name="blue">#FF0000FF</color>
     <color name="brown_with_transparency">#804040</color>
     <color name="white_with_transparency">#70FFFFFF</color>
+    <color name="dark_chocolate_with_transparency">#8025120B</color>
     <color name="label_color">#80000000</color>
+    <color name="gray">#808080</color>
 </resources>

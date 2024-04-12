@@ -2,32 +2,131 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white_with_transparency">
+
+    <TextView
+        android:id="@+id/guest_details_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guest Details"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:background="@color/dark_chocolate_with_transparency"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/guest_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guest Name"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
 
     <EditText
-        android:id="@+id/guest_name_edit_text"
+        android:id="@+id/layout_guest_name_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Guest Name"
-        android:inputType="text" />
+        android:hint="Enter Guest Name"
+        android:inputType="text"
+        android:backgroundTint="@color/gray"
+        android:layout_marginBottom="16dp"/>
 
-    <RadioGroup
-        android:id="@+id/gender_radio_group"
+    <TextView
+        android:id="@+id/guest_email_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/layout_guest_email_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:hint="Enter Email"
+        android:inputType="textEmailAddress"
+        android:backgroundTint="@color/gray"
+        android:layout_marginBottom="16dp"/>
 
-        <RadioButton
-            android:id="@+id/radio_button_male"
-            android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Male" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/radio_button_female"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/guest_gender_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <RadioGroup
+                android:id="@+id/gender_radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_button_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"/>
+
+                <RadioButton
+                    android:id="@+id/radio_button_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Female" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
 
-    </RadioGroup>
+            <TextView
+                android:id="@+id/guest_age_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Age"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/layout_guest_age_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Age"
+                android:inputType="number"
+                android:backgroundTint="@color/gray"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

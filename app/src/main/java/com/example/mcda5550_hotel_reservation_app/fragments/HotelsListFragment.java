@@ -88,7 +88,7 @@ public class HotelsListFragment extends Fragment implements ItemClickListener {
 
         // Fetch hotels
         showProgress(); // Show progress bar when fetching data
-        hotelViewModel.fetchHotels();
+        hotelViewModel.getHotelsLiveData();
     }
 
     private void showProgress() {
@@ -113,6 +113,7 @@ public class HotelsListFragment extends Fragment implements ItemClickListener {
         bundle.putString("checkOutDate", args.getString("checkOutDate"));
         bundle.putString("guestName", args.getString("guestName"));
         bundle.putString("numberOfGuests", args.getString("numberOfGuests") );
+        bundle.putInt("numOfDays", args.getInt("numberOfDays"));
 
         ReservationDetailsFragment reservationDetailsFragment = new ReservationDetailsFragment();
         reservationDetailsFragment.setArguments(bundle);

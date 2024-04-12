@@ -8,9 +8,9 @@ public class Reservation {
 
     // Instance variables for attributes of reservation
     private String hotelName;
-    private String checkInDate;
-    private String checkOutDate;
-    private List<Guest> guests;
+    private String checkIn;
+    private String checkOut;
+    private List<Guest> guests_list;
     private String confirmationNumber;
 
     //PRIMARY CONSTRUCTOR
@@ -18,41 +18,41 @@ public class Reservation {
 
     public Reservation(String hotelName, String checkInDate, String checkOutDate, List<Guest> guests) {
         this.hotelName = hotelName;
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
-        this.guests = guests;
+        this.checkIn = checkInDate;
+        this.checkOut = checkOutDate;
+        this.guests_list = guests;
     }
 
     public String getHotelName() {
         return hotelName;
     }
 
-    public void setHotelName(String hotelName) {
+    public void setHotel(String hotelName) {
         this.hotelName = hotelName;
     }
 
     public String getCheckInDate() {
-        return checkInDate;
+        return checkIn;
     }
 
     public void setCheckInDate(String checkInDate) {
-        this.checkInDate = checkInDate;
+        this.checkIn = checkInDate;
     }
 
     public String getCheckOutDate() {
-        return checkOutDate;
+        return checkOut;
     }
 
     public void setCheckOutDate(String checkOutDate) {
-        this.checkOutDate = checkOutDate;
+        this.checkOut = checkOutDate;
     }
 
     public List<Guest> getGuests() {
-        return guests;
+        return guests_list;
     }
 
-    public void setGuests(List<Guest> guests) {
-        this.guests = guests;
+    public void setGuests(List<Guest> guests_list) {
+        this.guests_list = guests_list;
     }
 
     public String getConfirmationNumber() {
