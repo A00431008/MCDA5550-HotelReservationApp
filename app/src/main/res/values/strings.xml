@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">MCDA5550-Hotel-Reservation-App</string>
-    <string name="welcome_message">Welcome to Hotel Reservation System</string>
-    <string name="hotel_search_title_text">Search Hotels</string>
+    <string name="hotel_search_title_text">Welcome to Hotel Reservation System !!!\n\nSearch Hotels</string>
     <string name="check_in_date_label">Check In Date:</string>
     <string name="check_out_date_label">Check Out Date:</string>
     <string name="number_of_guests_label">Number Of Guests:</string>
@@ -10,5 +9,5 @@
     <string name="guests_count_hint">Guests Count</string>
     <string name="primary_guest_name_label">Enter your Name</string>
     <string name="primary_guest_name_hint">Your Name</string>
-    <string name="reservation_success_message">Congratulations !!!\nYou have successfully made a reservation.\nYour confirmation number is:</string>
+    <string name="reservation_success_message">\n\n\nCongratulations !!!\nYou have successfully made a reservation.\nYour confirmation number is:</string>
 </resources>

@@ -114,16 +114,22 @@ public class HotelsListFragment extends Fragment implements ItemClickListener {
         bundle.putString("checkInDate", args.getString("checkInDate"));
         bundle.putString("checkOutDate", args.getString("checkOutDate"));
         bundle.putString("guestName", args.getString("guestName"));
-        bundle.putString("numberOfGuests", args.getString("numberOfGuests") );
+        bundle.putString("numberOfGuests", args.getString("numberOfGuests"));
         bundle.putInt("numberOfDays", args.getInt("numberOfDays"));
 
-        ReservationDetailsFragment reservationDetailsFragment = new ReservationDetailsFragment();
-        reservationDetailsFragment.setArguments(bundle);
 
-        requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.app_container_frame_layout, reservationDetailsFragment)
-                .addToBackStack(null)
-                .commit();
+        if (selectedHotel.getAvailability()) {
+
+            ReservationDetailsFragment reservationDetailsFragment = new ReservationDetailsFragment();
+            reservationDetailsFragment.setArguments(bundle);
+
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.app_container_frame_layout, reservationDetailsFragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            showToast(selectedHotel.getName() + " is not available. Please select another Hotel");
+        }
     }
 
     private void showToast(String message) {

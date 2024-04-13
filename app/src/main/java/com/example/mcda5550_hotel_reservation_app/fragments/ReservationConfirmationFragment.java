@@ -35,7 +35,7 @@ public class ReservationConfirmationFragment extends Fragment {
         confirmationTextView = view.findViewById(R.id.confirmation_number_text_view);
 
         String confirmationNumber = getArguments().getString("confirmation_number");
-        confirmationTextView.setText(confirmationNumber); // line 37
+        confirmationTextView.setText(confirmationNumber + "\n\n\n"); // line 37
 
         backButton.setOnClickListener(v -> handleBackButtonClick(view));
     }

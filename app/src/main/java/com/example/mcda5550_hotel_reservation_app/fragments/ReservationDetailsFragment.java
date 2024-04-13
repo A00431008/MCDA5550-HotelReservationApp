@@ -54,8 +54,6 @@ public class ReservationDetailsFragment extends Fragment {
         TextView checkInDateTextView = view.findViewById(R.id.check_in_date_text_view);
         TextView checkOutDateTextView = view.findViewById(R.id.check_out_date_text_view);
         TextView pricePerDayTextView = view.findViewById(R.id.price_per_day_text_view);
-//        TextView numOfDaysTextView = view.findViewById(R.id.number_of_days_text_view);
-//        TextView totalPriceTextView = view.findViewById(R.id.total_price_text_view);
         Button submitButton = view.findViewById(R.id.confirm_reservation_button);
         guestContainer = view.findViewById(R.id.guest_container);
 
@@ -71,12 +69,10 @@ public class ReservationDetailsFragment extends Fragment {
             double totalPrice = numberOfDays * pricePerDay * numGuests;
 
             // Set hotel details to corresponding TextViews
-            hotelNameTextView.setText("Hotel Name: " + selectedHotel.getName());
+            hotelNameTextView.setText("\nHotel Name: " + selectedHotel.getName());
             checkInDateTextView.setText("Check In Date: " + checkInDate);
             checkOutDateTextView.setText("Check Out Date: " + checkOutDate);
             pricePerDayTextView.setText("Price per day : $" + pricePerDay);
-//            numOfDaysTextView.setText("Duration: " + numberOfDays + " Days");
-//            totalPriceTextView.setText("Total Price: $ " + totalPrice );
 
 
         }

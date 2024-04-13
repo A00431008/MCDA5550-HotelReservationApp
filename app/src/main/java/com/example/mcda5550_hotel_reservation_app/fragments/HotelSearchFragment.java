@@ -110,7 +110,10 @@ public class HotelSearchFragment extends Fragment {
         if (num <= 0) {
             showToast("Number of guests must be at least 1");
             return false;
-        } else if (!guestName.matches("[a-zA-Z ]+")) {
+        } else if (num > 5) {
+            showToast("Max number of guests can only be 5");
+            return false;
+        }else if (!guestName.matches("[a-zA-Z ]+")) {
             showToast("Name can only contain alphabets");
             return false;
         } else if (guestName.length() > 50) {
