@@ -54,8 +54,8 @@ public class ReservationDetailsFragment extends Fragment {
         TextView checkInDateTextView = view.findViewById(R.id.check_in_date_text_view);
         TextView checkOutDateTextView = view.findViewById(R.id.check_out_date_text_view);
         TextView pricePerDayTextView = view.findViewById(R.id.price_per_day_text_view);
-        TextView numOfDaysTextView = view.findViewById(R.id.number_of_days_text_view);
-        TextView totalPriceTextView = view.findViewById(R.id.total_price_text_view);
+//        TextView numOfDaysTextView = view.findViewById(R.id.number_of_days_text_view);
+//        TextView totalPriceTextView = view.findViewById(R.id.total_price_text_view);
         Button submitButton = view.findViewById(R.id.confirm_reservation_button);
         guestContainer = view.findViewById(R.id.guest_container);
 
@@ -71,12 +71,12 @@ public class ReservationDetailsFragment extends Fragment {
             double totalPrice = numberOfDays * pricePerDay * numGuests;
 
             // Set hotel details to corresponding TextViews
-            hotelNameTextView.setText(selectedHotel.getName());
+            hotelNameTextView.setText("Hotel Name: " + selectedHotel.getName());
             checkInDateTextView.setText("Check In Date: " + checkInDate);
             checkOutDateTextView.setText("Check Out Date: " + checkOutDate);
             pricePerDayTextView.setText("Price per day : $" + pricePerDay);
-            numOfDaysTextView.setText("Duration: " + numberOfDays + " Days");
-            totalPriceTextView.setText("Total Price: $ " + totalPrice );
+//            numOfDaysTextView.setText("Duration: " + numberOfDays + " Days");
+//            totalPriceTextView.setText("Total Price: $ " + totalPrice );
 
 
         }
@@ -109,7 +109,7 @@ public class ReservationDetailsFragment extends Fragment {
     }
 
     private void submitReservation() {
-
+        Boolean isInputsValid = true;
         List<Guest> guests_list = new ArrayList<>();
         for (int i = 0; i < guestContainer.getChildCount(); i++) {
             View guestView = guestContainer.getChildAt(i);
@@ -122,15 +122,23 @@ public class ReservationDetailsFragment extends Fragment {
             String gender = getSelectedGender(genderRadioGroup);
             String email = emailEditText.getText().toString();
             int age = Integer.parseInt(ageEditText.getText().toString());
-            guests_list.add(new Guest(name, gender, email, age));
+            if (validateInputs(name, gender, email, age, (i == 1))
+                && isValidEmail(email)) {
+                guests_list.add(new Guest(name, gender, email, age));
+            } else {
+                isInputsValid = false;
+            }
+
         }
 
         // Code to submit data to server goes here
         Reservation reservation = new Reservation(selectedHotel.getName(), checkInDate, checkOutDate, guests_list);
+
         ReservationViewModel reservationViewModel = new ViewModelProvider(this).get(ReservationViewModel.class);
 
+        Boolean finalIsInputsValid = isInputsValid;
         reservationViewModel.makeReservation(reservation).observe(getViewLifecycleOwner(), reservationResponse -> {
-            if (reservationResponse != null) {
+            if (reservationResponse != null && finalIsInputsValid) {
                 initiateConfirmationScreen(reservationResponse);
             } else {
                 showToast("Failed to create reservation. Please try again.");

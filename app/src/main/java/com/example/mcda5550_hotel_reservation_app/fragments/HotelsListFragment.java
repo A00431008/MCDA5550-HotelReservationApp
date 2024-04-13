@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,6 +46,7 @@ public class HotelsListFragment extends Fragment implements ItemClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         // Initialize UI components
         TextView titleTextView = view.findViewById(R.id.heading_text_view);
@@ -113,7 +115,7 @@ public class HotelsListFragment extends Fragment implements ItemClickListener {
         bundle.putString("checkOutDate", args.getString("checkOutDate"));
         bundle.putString("guestName", args.getString("guestName"));
         bundle.putString("numberOfGuests", args.getString("numberOfGuests") );
-        bundle.putInt("numOfDays", args.getInt("numberOfDays"));
+        bundle.putInt("numberOfDays", args.getInt("numberOfDays"));
 
         ReservationDetailsFragment reservationDetailsFragment = new ReservationDetailsFragment();
         reservationDetailsFragment.setArguments(bundle);
@@ -122,6 +124,10 @@ public class HotelsListFragment extends Fragment implements ItemClickListener {
                 .replace(R.id.app_container_frame_layout, reservationDetailsFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
 
 }

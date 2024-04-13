@@ -133,6 +133,7 @@ public class HotelSearchFragment extends Fragment {
         return numDays;
     }
 
+
     private void startHotelListFragment(String checkInDate, String checkOutDate,
                                         String numberOfGuests, String guestName, int numOfDays) {
         Bundle bundle = new Bundle();
