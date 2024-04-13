@@ -9,7 +9,6 @@ import com.example.mcda5550_hotel_reservation_app.repository.HotelRepository;
 import java.util.List;
 
 public class HotelViewModel extends ViewModel {
-//    MutableLiveData<List<Hotel>> hotelsMockData;
     private final HotelRepository repository;
     private LiveData<List<Hotel>> hotelsLiveData;
 
@@ -23,9 +22,4 @@ public class HotelViewModel extends ViewModel {
         }
         return hotelsLiveData;
     }
-
-//    public void fetchHotels() {
-//        List<Hotel> hotels = repository.getMockHotels();
-//        hotelsLiveData.setValue(hotels);
-//    }
 }

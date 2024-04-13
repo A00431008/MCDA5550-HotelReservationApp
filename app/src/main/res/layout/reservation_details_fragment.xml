@@ -86,18 +86,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/check_in_date_text_view"
                 android:layout_marginTop="8dp"/>
 
-            <!-- Number of Days -->
-<!--            <TextView-->
-<!--                android:id="@+id/number_of_days_text_view"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Number of Days: 0"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textColor="@color/black"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/check_out_date_text_view"-->
-<!--                android:layout_marginTop="8dp"/>-->
-
             <!-- Price Per Day -->
             <TextView
                 android:id="@+id/price_per_day_text_view"
@@ -109,18 +97,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/check_out_date_text_view"
                 android:layout_marginTop="8dp"/>
-
-            <!-- Total Price -->
-<!--            <TextView-->
-<!--                android:id="@+id/total_price_text_view"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Total Price: $0"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textColor="@color/black"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/price_per_day_text_view"-->
-<!--                android:layout_marginTop="8dp"/>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
