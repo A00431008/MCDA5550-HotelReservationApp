@@ -12,9 +12,12 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface HotelReservationApiService {
-    @POST("make_reservation")
+    @POST("/create_reservation")
     Call<ReservationResponse> createReservation(@Body Reservation reservation);
 
-    @GET("/getHotels")
+    @GET("/get_hotels")
     Call<List<Hotel>> getHotels();
+
+//    @POST("/test_post")
+//    Call<ReservationResponse> testPost(@Body Reservation reservation);
 }

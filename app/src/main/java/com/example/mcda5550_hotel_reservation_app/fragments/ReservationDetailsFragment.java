@@ -107,6 +107,7 @@ public class ReservationDetailsFragment extends Fragment {
     }
 
     private void submitReservation() {
+
         List<Guest> guests_list = new ArrayList<>();
         for (int i = 0; i < guestContainer.getChildCount(); i++) {
             View guestView = guestContainer.getChildAt(i);
@@ -119,16 +120,11 @@ public class ReservationDetailsFragment extends Fragment {
             String gender = getSelectedGender(genderRadioGroup);
             String email = emailEditText.getText().toString();
             int age = Integer.parseInt(ageEditText.getText().toString());
-            if (validateInputs(name, gender, email, age,(i == 1))) {
-                return;
-            }
             guests_list.add(new Guest(name, gender, email, age));
         }
 
-
         // Code to submit data to server goes here
         Reservation reservation = new Reservation(selectedHotel.getName(), checkInDate, checkOutDate, guests_list);
-
         ReservationViewModel reservationViewModel = new ViewModelProvider(this).get(ReservationViewModel.class);
 
         reservationViewModel.makeReservation(reservation).observe(getViewLifecycleOwner(), reservationResponse -> {
@@ -139,6 +135,7 @@ public class ReservationDetailsFragment extends Fragment {
                 showToast("Failed to create reservation. Please try again.");
             }
         });
+
     }
 
     // Function to show toast message
