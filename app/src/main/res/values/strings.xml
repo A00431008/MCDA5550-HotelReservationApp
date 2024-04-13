@@ -10,4 +10,5 @@
     <string name="guests_count_hint">Guests Count</string>
     <string name="primary_guest_name_label">Enter your Name</string>
     <string name="primary_guest_name_hint">Your Name</string>
+    <string name="reservation_success_message">Congratulations !!!\nYou have successfully made a reservation.\nYour confirmation number is:</string>
 </resources>

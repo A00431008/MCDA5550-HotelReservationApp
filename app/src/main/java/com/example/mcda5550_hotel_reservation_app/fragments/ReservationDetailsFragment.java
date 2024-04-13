@@ -13,12 +13,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mcda5550_hotel_reservation_app.R;
 import com.example.mcda5550_hotel_reservation_app.model.Guest;
 import com.example.mcda5550_hotel_reservation_app.model.Hotel;
 import com.example.mcda5550_hotel_reservation_app.model.Reservation;
+import com.example.mcda5550_hotel_reservation_app.model.ReservationResponse;
 import com.example.mcda5550_hotel_reservation_app.viewmodel.ReservationViewModel;
 
 import java.util.ArrayList;
@@ -129,13 +131,25 @@ public class ReservationDetailsFragment extends Fragment {
 
         reservationViewModel.makeReservation(reservation).observe(getViewLifecycleOwner(), reservationResponse -> {
             if (reservationResponse != null) {
-                showToast("Reservation created successfully. Confirmation number: "
-                                + reservationResponse.getConfirmationNumber());
+                initiateConfirmationScreen(reservationResponse);
             } else {
                 showToast("Failed to create reservation. Please try again.");
             }
         });
 
+    }
+
+    private void initiateConfirmationScreen(ReservationResponse reservationResponse) {
+        Bundle bundle = new Bundle();
+        bundle.putString("confirmation_number", reservationResponse.getConfirmationNumber());
+
+        ReservationConfirmationFragment reservationConfirmationFragment = new ReservationConfirmationFragment();
+        reservationConfirmationFragment.setArguments(bundle);
+
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.app_container_frame_layout, reservationConfirmationFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     // Function to show toast message
