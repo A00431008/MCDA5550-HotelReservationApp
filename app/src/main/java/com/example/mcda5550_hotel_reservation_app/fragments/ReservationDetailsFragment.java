@@ -117,29 +117,38 @@ public class ReservationDetailsFragment extends Fragment {
             String name = nameEditText.getText().toString();
             String gender = getSelectedGender(genderRadioGroup);
             String email = emailEditText.getText().toString();
-            int age = Integer.parseInt(ageEditText.getText().toString());
-            if (validateInputs(name, gender, email, age, (i == 1))
-                && isValidEmail(email)) {
-                guests_list.add(new Guest(name, gender, email, age));
-            } else {
+            String ageString = ageEditText.getText().toString();
+            if (name.trim().isEmpty() || gender.trim().isEmpty() || email.trim().isEmpty() || ageString.trim().isEmpty()) {
+                showToast("All fields are required and cannot be empty!!!");
                 isInputsValid = false;
+            } else {
+                int age = Integer.parseInt(ageString);
+                if (validateInputs(name, gender, email, age, (i == 1)) && isValidEmail(email)) {
+                    guests_list.add(new Guest(name, gender, email, age));
+                } else {
+                    isInputsValid = false;
+                }
             }
 
         }
 
-        // Code to submit data to server goes here
-        Reservation reservation = new Reservation(selectedHotel.getName(), checkInDate, checkOutDate, guests_list);
 
-        ReservationViewModel reservationViewModel = new ViewModelProvider(this).get(ReservationViewModel.class);
+        if (isInputsValid) {
+            // Code to submit data to server goes here
+            Reservation reservation = new Reservation(selectedHotel.getName(), checkInDate, checkOutDate, guests_list);
 
-        Boolean finalIsInputsValid = isInputsValid;
-        reservationViewModel.makeReservation(reservation).observe(getViewLifecycleOwner(), reservationResponse -> {
-            if (reservationResponse != null && finalIsInputsValid) {
-                initiateConfirmationScreen(reservationResponse);
-            } else {
-                showToast("Failed to create reservation. Please try again.");
-            }
-        });
+            ReservationViewModel reservationViewModel = new ViewModelProvider(this).get(ReservationViewModel.class);
+
+
+            reservationViewModel.makeReservation(reservation).observe(getViewLifecycleOwner(), reservationResponse -> {
+                if (reservationResponse != null && reservationResponse.getConfirmationNumber() != null) {
+                    initiateConfirmationScreen(reservationResponse);
+                } else {
+                    showToast("Failed to create reservation. Please try again.");
+                }
+            });
+        }
+
 
     }
 
@@ -215,6 +224,6 @@ public class ReservationDetailsFragment extends Fragment {
         } else if (checkedRadioButtonId == R.id.radio_button_female) {
             return "Female";
         }
-        return "Other";
+        return "";
     }
 }
